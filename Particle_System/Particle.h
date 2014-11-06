@@ -22,7 +22,7 @@ private:
 
 public:
 	Particle(int particleType, float position[3], float direction[3], float speed, float size, float color[3]);
-	void update(); //this will update a particle's information (ie position and rotation)
+	void updateLife(); //this will update a particle's information (ie position and rotation)
 	
 	
 	//getters

@@ -137,10 +137,11 @@ void display(void)
 
 void timer(int value)
 {
-	glutTimerFunc(500, timer, 0);
+	glutTimerFunc(50, timer, 0);
 	if (!gPause)
 	{
-		//particleSystem.updateParticles();
+		//particleSystem.spawnParticle();
+		particleSystem.updateParticles();
 
 		glutPostRedisplay();
 	}

@@ -95,33 +95,33 @@ void ParticleSystem::updateParticles(void)
 	/*cout << endl << iteratorD->element->getPosition(0) << " " <<
 	iteratorD->element->getPosition(1) << " " <<
 	iteratorD->element->getPosition(2);*/
-	float newPosition[3];
-	//add safety check
-
-	//This initializes the newPosition values to the old position
-	for (int i = 0; i <= 2; i++)
-	{
-		newPosition[i] = iteratorA->element->getPosition(i);
-		
-	}
-	//cout << "\nposition of new: " << iteratorA->element->getPosition(1) << "\n";
-	//Add a switch to go through all particle types (that will determine how to calculate next position)
-	float amount = (float)1/ (rand() % 5 + 10);
-	//cout << "Amount is " << amount;
+	float newPosition[3] = { 0, 0, 0 };
 	
-
 	while (iteratorA->next != NULL)
 	{
-		for (int i = 0; i <= 2; i++)
-			newPosition[i] += iteratorA->element->getDirection(i);
+		iteratorA->element->updateLife();
+		if (iteratorA->element->getLifeRemaining() < 0)
+		{
+			cout << "LESS";
+		}
 
+		//set newPosition[3] to hold the new position of the particle
+		for (int i = 0; i <= 2; i++)
+		{
+			newPosition[i] = iteratorA->element->getPosition(i);
+			newPosition[i] += iteratorA->element->getDirection(i);
+		}
+		
 		//cout << "New Position x: " << newPosition[0] << " y: " << newPosition[1] << "z: " << newPosition[2] << endl;
+		
+		//move the element to newPosition
 		iteratorA->element->setPosition(newPosition);
 
-		/*cout << endl << iteratorA->element->getPosition(0) << " " <<
-		iteratorA->element->getPosition(1) << " " <<
-		iteratorA->element->getPosition(2);*/
-
+		//tell newPosition to go back to the spawn position
+		for (int i = 0; i < 2; i++)
+			newPosition[i] = this->position[i];
+		
+		//iterate to the next particle
 		iteratorA = iteratorA->next;
 	}
 }

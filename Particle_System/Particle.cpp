@@ -16,7 +16,7 @@ Particle::Particle(int particleType, float position[3], float direction[3], floa
 	}
 }
 
-void Particle::update()
+void Particle::updateLife()
 {
 	this->lifeRemaining--;
 	//this->position[1] += 3;
