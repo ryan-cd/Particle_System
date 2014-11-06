@@ -1,17 +1,3 @@
-/*#include <stdio.h>
-#include <stdlib.h>
-
-#ifdef __APPLE__
-#  include <OpenGL/gl.h>
-#  include <OpenGL/glu.h>
-#  include <GLUT/glut.h>
-#else
-//#  include <GL/gl.h>
-//#  include <GL/glu.h>
-//#  include <GL/freeglut.h>
-#include <GL/glut.h>
-#include <GL/GL.h>
-#endif*/
 #include "Headers.h"
 
 
@@ -35,6 +21,7 @@ ParticleSystem particleSystem(gParticleSysPos, gGravity, gWind);
 
 void init(void)
 {
+	//set random number generator seed
 	srand(time(NULL));
 
 
@@ -137,7 +124,7 @@ void display(void)
 
 void timer(int value)
 {
-	glutTimerFunc(50, timer, 0);
+	glutTimerFunc(500, timer, 0);
 	if (!gPause)
 	{
 		//particleSystem.spawnParticle();
@@ -146,25 +133,16 @@ void timer(int value)
 		glutPostRedisplay();
 	}
 }
-/*
-void idle(void)
-{
-	cout << "entering idle with ";
-	if (gPause == true) cout << "Paused"; else cout << "Not paused";
-	{
-		particleSystem.updateParticles();
-		glutPostRedisplay();
-	}
-}
-*/
+
+
 /* main function - program entry point */
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);		//starts up GLUT
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 
-	glutInitWindowSize(800, 800);
-	glutInitWindowPosition(50, 50);
+	glutInitWindowSize(1200, 1200);
+	glutInitWindowPosition(600, 0);
 
 	glutCreateWindow("Particle Generator");	//creates the window
 
@@ -172,7 +150,6 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(special);
 	glutTimerFunc(1, timer, 0);
-	//glutIdleFunc(idle);
 	
 	init(); //setup globals and other opengl features
 

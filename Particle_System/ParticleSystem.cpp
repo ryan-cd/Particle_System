@@ -30,50 +30,55 @@ ParticleSystem::ParticleSystem(float position[3], float gravity, float wind[3])
 
 void ParticleSystem::spawnParticle(void)
 {
-	
-	glLoadIdentity();
 	if (iteratorA != NULL)
 		cout << "Num particles: " << iteratorA->element->getNumParticles() << "\n";
+	
 	float newColor[3] = { (float)(rand() / (float)(RAND_MAX + 1)), 
 		(float)(rand() / (float)(RAND_MAX + 1)), 
 		(float)(rand() / (float)(RAND_MAX + 1)) };
-	
 
 	float direction[3] = { 2.0f * ((float)rand() / (float)RAND_MAX) - 1.0f,
 		getGravity(),
 		2.0f * ((float)rand() / (float)RAND_MAX) - 1.0f };
 	
-	//cout << "New Position x: " << direction[0] << " y: " << direction[1] << "z: " << direction[2] << endl;
-	cout << this->position[0] << " " << this->position[1] << " " << this->position[2];
 
 	particle = new Particle(0, this->position, direction, 1, 1, newColor);
 	
 
 	iterator2 = new ParticleList;
-	if (iterator1 != NULL)
+	if (iterator1 != NULL && iterator1->element != NULL)
 		iterator1->next = iterator2;
 
 	iterator2->element = particle;
 	
-	iterator2->prev = iterator1;
-	iterator2->next = NULL;
+	if (iterator1 != NULL && iterator1->element != NULL)
+		iterator2->prev = iterator1;
+	else
+	{
+		iterator2->prev = NULL;
+		head = iterator2;
+	}
 
-	iterator1 = iterator2;
+	iterator2->next = NULL;
 	
+	iterator1 = iterator2;
+
 	tail = iterator1;
 
 }
 
 void ParticleSystem::drawParticles(void)
 {
+
 	iteratorA = head;
+	if ((iteratorA != NULL && iteratorA->element != NULL))
+	cout << "\n DRAW";
 	/*cout << endl << "before translatef: " << iteratorA->element->getPosition(0) << " " <<
 		iteratorA->element->getPosition(1) << " " <<
 		iteratorA->element->getPosition(2);*/
 	
-	while (iteratorA->next != NULL)
+	while (iteratorA != NULL && iteratorA->element != NULL)
 	{
-		
 		glPushMatrix();
 		glColor3f(iteratorA->element->getColor(0), 
 			iteratorA->element->getColor(1), 
@@ -87,22 +92,44 @@ void ParticleSystem::drawParticles(void)
 
 		iteratorA = iteratorA->next;
 	}
+	
 }
 
 void ParticleSystem::updateParticles(void)
 {
 	iteratorA = head;
-	/*cout << endl << iteratorD->element->getPosition(0) << " " <<
-	iteratorD->element->getPosition(1) << " " <<
-	iteratorD->element->getPosition(2);*/
+	
+	
+	
+	//printf("equiv %s", iteratorA->element->getLifeRemaining() == iteratorA->next->element->getLifeRemaining() ? "yes\n" : "no\n");
+
 	float newPosition[3] = { 0, 0, 0 };
 	
-	while (iteratorA->next != NULL)
+	while (iteratorA != NULL && iteratorA->element != NULL)
 	{
+		
 		iteratorA->element->updateLife();
-		if (iteratorA->element->getLifeRemaining() < 0)
+		if (iteratorA->element->getLifeRemaining() <= 0)
 		{
-			cout << "LESS";
+			/*if (iteratorA->next == NULL)
+			{
+				tail = iteratorA->prev;
+				
+			}*/
+			if (iteratorA->prev != NULL)
+				iteratorA->prev->next = iteratorA->next;
+			if (iteratorA->next != NULL)
+				iteratorA->next->prev = iteratorA->prev;
+			//iteratorA = NULL;
+			iteratorA->element->decrementNumParticles();
+			//printf("Iterators equiv %s", iterator1 == iteratorA ? "NULL\n" : "Not Null\n");
+			iteratorA->element = NULL;
+			iteratorA = iteratorA->next;
+			head = iteratorA;
+			//printf("Iterators equiv %s", iterator1 == iteratorA ? "NULL\n" : "Not Null\n");
+			//
+			continue;
+			
 		}
 
 		//set newPosition[3] to hold the new position of the particle

@@ -34,5 +34,7 @@ public:
 
 	//setters
 	void setPosition(float newPosition[3]);
+	void setLifeRemaining(int newLifeRemaining);
+	void decrementNumParticles(void);
 };
 #endif
