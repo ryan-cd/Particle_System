@@ -1,7 +1,7 @@
 #include "ParticleSystem.h"
 
 Particle* particle; //used to create new particles in the linked list
-
+float gParticleSize = 0.5;
 
 ParticleSystem::ParticleSystem(float position[3], float gravity, float wind[3])
 {
@@ -41,7 +41,7 @@ void ParticleSystem::spawnParticle(void)
 		getGravity(),
 		2.0f * ((float)rand() / (float)RAND_MAX) - 1.0f };
 	
-
+	
 	particle = new Particle(0, this->position, direction, 1, 1, newColor);
 	
 
@@ -69,13 +69,11 @@ void ParticleSystem::spawnParticle(void)
 
 void ParticleSystem::drawParticles(void)
 {
-
+	
 	iteratorA = head;
-	if ((iteratorA != NULL && iteratorA->element != NULL))
-	cout << "\n DRAW";
-	/*cout << endl << "before translatef: " << iteratorA->element->getPosition(0) << " " <<
-		iteratorA->element->getPosition(1) << " " <<
-		iteratorA->element->getPosition(2);*/
+	//printf("Num Elements: %d", iteratorA != NULL ? iteratorA->element->getNumParticles() : 0);
+	
+	
 	
 	while (iteratorA != NULL && iteratorA->element != NULL)
 	{
@@ -87,7 +85,12 @@ void ParticleSystem::drawParticles(void)
 		glTranslatef(iteratorA->element->getPosition(0),
 						iteratorA->element->getPosition(1),
 						iteratorA->element->getPosition(2));
-		glutSolidCube(0.2);
+
+		glRotatef(iteratorA->element->getRotation(0), 1, 0, 0);
+		glRotatef(iteratorA->element->getRotation(1), 0, 1, 0);
+		glRotatef(iteratorA->element->getRotation(2), 0, 0, 1);
+
+		glutSolidCube(gParticleSize);
 		glPopMatrix();
 
 		iteratorA = iteratorA->next;
@@ -101,8 +104,6 @@ void ParticleSystem::updateParticles(void)
 	
 	
 	
-	//printf("equiv %s", iteratorA->element->getLifeRemaining() == iteratorA->next->element->getLifeRemaining() ? "yes\n" : "no\n");
-
 	float newPosition[3] = { 0, 0, 0 };
 	
 	while (iteratorA != NULL && iteratorA->element != NULL)
@@ -111,23 +112,18 @@ void ParticleSystem::updateParticles(void)
 		iteratorA->element->updateLife();
 		if (iteratorA->element->getLifeRemaining() <= 0)
 		{
-			/*if (iteratorA->next == NULL)
-			{
-				tail = iteratorA->prev;
-				
-			}*/
+			
 			if (iteratorA->prev != NULL)
 				iteratorA->prev->next = iteratorA->next;
 			if (iteratorA->next != NULL)
 				iteratorA->next->prev = iteratorA->prev;
-			//iteratorA = NULL;
+			
 			iteratorA->element->decrementNumParticles();
-			//printf("Iterators equiv %s", iterator1 == iteratorA ? "NULL\n" : "Not Null\n");
+			
 			iteratorA->element = NULL;
 			iteratorA = iteratorA->next;
 			head = iteratorA;
-			//printf("Iterators equiv %s", iterator1 == iteratorA ? "NULL\n" : "Not Null\n");
-			//
+			
 			continue;
 			
 		}
@@ -138,8 +134,8 @@ void ParticleSystem::updateParticles(void)
 			newPosition[i] = iteratorA->element->getPosition(i);
 			newPosition[i] += iteratorA->element->getDirection(i);
 		}
-		
-		//cout << "New Position x: " << newPosition[0] << " y: " << newPosition[1] << "z: " << newPosition[2] << endl;
+		if (newPosition[1] < 0)
+			iteratorA->element->invertYDirection();
 		
 		//move the element to newPosition
 		iteratorA->element->setPosition(newPosition);

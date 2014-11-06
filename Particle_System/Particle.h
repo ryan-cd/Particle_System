@@ -31,10 +31,12 @@ public:
 	float getDirection(int direction);
 	float getColor(int newColor);
 	long getNumParticles(void);
+	float getRotation(int axis);
 
 	//setters
 	void setPosition(float newPosition[3]);
 	void setLifeRemaining(int newLifeRemaining);
 	void decrementNumParticles(void);
+	void invertYDirection(void);
 };
 #endif

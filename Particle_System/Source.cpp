@@ -2,15 +2,15 @@
 
 
 //Globals.
-float gCamPos[3] = { 0, 3, 20 }; // where the camera is
+float gCamPos[3] = { 0, 13, 50 }; // where the camera is
 
 //float gPlatformVerteces[8][3] = { { -1, -1, 1 }, { -1, 1, 1 }, { 1, 1, 1 }, { 1, -1, 1 }, { -1, -1, -1 }, { -1, 1, -1 }, { 1, 1, -1 }, { 1, -1, -1 } }; //vertices to make a platform box
 float gPlatformColors[6][3] = { { 1, 0, 0 }, { 0, 1, 1 }, { 1, 1, 0 }, { 0, 1, 0 }, { 0, 0, 1 }, { 1, 0, 1 } }; //colors of the faces of the platform box
-float gPlatformWidth = 10;
+float gPlatformWidth = 30;
 float gPlatformHeight = 1;
-float gPlatformDepth = 10;
+float gPlatformDepth = 30;
 
-float gParticleSysPos[3] = { 0, 5, 0 };
+float gParticleSysPos[3] = { 0, 15, 0 };
 float gGravity = (float) -1/1.2;
 float gWind[3] = { 1, 0, 0 };
 
@@ -124,10 +124,10 @@ void display(void)
 
 void timer(int value)
 {
-	glutTimerFunc(500, timer, 0);
+	glutTimerFunc(50, timer, 0);
 	if (!gPause)
 	{
-		//particleSystem.spawnParticle();
+		particleSystem.spawnParticle();
 		particleSystem.updateParticles();
 
 		glutPostRedisplay();
