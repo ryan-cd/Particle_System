@@ -1,15 +1,8 @@
-﻿Build started 2014-11-06 11:05:43 PM.
+﻿Build started 2014-11-06 11:49:45 PM.
      1>Project "C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Particle_System\Particle_System.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ParticleSystem.cpp
-         ParticleSystem.cpp
-     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\particlesystem.cpp(8): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\particlesystem.cpp(9): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\particlesystem.cpp(10): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\particlesystem.cpp(11): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\particlesystem.cpp(50): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\particlesystem.cpp(52): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\particlesystem.cpp(187): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ShapeCreator.cpp
+         ShapeCreator.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Debug\Particle_System.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Debug\Particle_System.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Debug\Particle_System.lib" /MACHINE:X86 Debug\Particle.obj
          Debug\ParticleSystem.obj
@@ -20,4 +13,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.79
+Time Elapsed 00:00:00.75

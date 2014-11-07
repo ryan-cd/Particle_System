@@ -43,7 +43,8 @@ void ShapeCreator::cube(float v[8][3], float colors[6][3])
 	drawPolygon(0, 3, 2, 1, v);
 
 	glColor3fv(colors[2]);
-	drawPolygon(1, 0, 4, 5, v);
+	//drawPolygon(1, 0, 4, 5, v);
+	drawPolygon(0, 1, 5, 4, v);
 
 	glColor3fv(colors[3]);
 	drawPolygon(5, 1, 2, 6, v);
@@ -52,8 +53,10 @@ void ShapeCreator::cube(float v[8][3], float colors[6][3])
 	drawPolygon(2, 3, 7, 6, v);
 
 	glColor3fv(colors[5]);
-	drawPolygon(6, 5, 4, 7, v);
+	//drawPolygon(6, 5, 4, 7, v);
+	drawPolygon(4, 5, 6, 7, v);
 
 	glColor3fv(colors[0]);
-	drawPolygon(4, 0, 3, 7, v);
+	//drawPolygon(4, 0, 3, 7, v);
+	drawPolygon(0, 4, 7, 3, v);
 }
