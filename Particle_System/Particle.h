@@ -41,5 +41,6 @@ public:
 	void invertYDirection(void);
 	void applyFriction(float friction);
 	void applyGravity(float gravity);
+	void setNumParticles(unsigned int amount);
 };
 #endif

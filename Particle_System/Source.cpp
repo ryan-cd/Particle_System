@@ -16,6 +16,7 @@ float gWind[3] = { 1, 0, 0 };
 
 bool gPause = false;
 
+
 ShapeCreator shapeCreator;
 ParticleSystem particleSystem(gParticleSysPos, gGravity, gWind);
 
@@ -51,9 +52,12 @@ void keyboard(unsigned char key, int xIn, int yIn)
 {
 	switch (key)
 	{
-	case 'p':
+	case ' ':
 		//toggle pause
 		gPause = (gPause == true) ? false : true;
+		break;
+	case 'r':
+		particleSystem.reset();
 		break;
 	case 'w':
 		particleSystem.spawnParticle();
@@ -73,6 +77,7 @@ void special(int key, int x, int y)
 	/* arrow key presses move the camera */
 	switch (key)
 	{
+		
 	case GLUT_KEY_LEFT:
 		gCamPos[0] -= 0.3;
 		break;
@@ -129,11 +134,12 @@ void timer(int value)
 	glutTimerFunc(8, timer, 0);
 	if (!gPause)
 	{
-		//particleSystem.spawnParticle();
-		particleSystem.updateParticles();
-
-		glutPostRedisplay();
+		particleSystem.spawnParticle();
+		
 	}
+	particleSystem.updateParticles();
+
+	glutPostRedisplay();
 }
 
 

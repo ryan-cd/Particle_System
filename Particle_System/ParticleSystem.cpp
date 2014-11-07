@@ -25,19 +25,15 @@ ParticleSystem::ParticleSystem(float position[3], float gravity, float wind[3])
 	
 	tail = iterator1;
 
-	for (int i = 0; i < 1; i++)
-	{
-		spawnParticle();
-		if (i == 0)
-			head = iterator1;
-	}
 	
 }
 
 void ParticleSystem::spawnParticle(void)
 {
-	if (iteratorA != NULL)
-		cout << "Num particles: " << iteratorA->element->getNumParticles() << "\n";
+	//if the head is not set (the list is empty) then make the new list the head
+	if (head == NULL)
+		head = iterator1;
+
 	
 	float newColor[3] = { (float)(rand() / (float)(RAND_MAX + 1)), 
 		(float)(rand() / (float)(RAND_MAX + 1)), 
@@ -194,4 +190,11 @@ void ParticleSystem::setPlatformDimensions(float width, float height, float dept
 void ParticleSystem::toggleFriction(void)
 {
 	this->friction = this->friction ? false : true;
+}
+
+void ParticleSystem::reset()
+{
+	if (head)
+		head->element->setNumParticles(0);
+	head = tail = iteratorA = NULL;
 }

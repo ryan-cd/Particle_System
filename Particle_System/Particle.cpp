@@ -129,3 +129,8 @@ void Particle::applyGravity(float gravity)
 	if (this->direction[1] > -0.3)
 		this->direction[1] += gravity;
 }
+
+void Particle::setNumParticles(unsigned int amount)
+{
+	numParticles = amount;
+}

@@ -15,6 +15,7 @@ public:
 	float getGravity(); //returns the saved gravity
 	void setPlatformDimensions(float width, float height, float depth);
 	void toggleFriction(); 
+	void reset();
 
 private:
 	float position[3]; //where the particle system is
