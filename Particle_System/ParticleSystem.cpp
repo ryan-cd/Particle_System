@@ -44,7 +44,7 @@ void ParticleSystem::spawnParticle(void)
 		(float)(rand() / (float)(RAND_MAX + 1)) };
 
 	float direction[3] = { 2.0f * ((float)rand() / (float)RAND_MAX) - 1.0f,
-		getGravity(),
+		(-0.5 * (float)rand() / (float)RAND_MAX) - 0.5,
 		2.0f * ((float)rand() / (float)RAND_MAX) - 1.0f };
 	
 	
@@ -143,6 +143,7 @@ void ParticleSystem::updateParticles(void)
 
 			newRotation[i] += gAmountToRotate;
 		}
+		iteratorA->element->applyGravity(getGravity());
 
 		if (newPosition[1] < this->bounceY
 			&& newPosition[0] > this->minX
@@ -151,6 +152,7 @@ void ParticleSystem::updateParticles(void)
 			&& newPosition[2] < this->maxZ)
 		{
 			iteratorA->element->invertYDirection();
+			//iteratorA->element->applyGravity(0.5);
 			newPosition[1] = bounceY;
 			if (this->friction)
 			{

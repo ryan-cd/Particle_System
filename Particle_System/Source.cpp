@@ -11,7 +11,7 @@ float gPlatformHeight = 1;
 float gPlatformDepth = 30;
 
 float gParticleSysPos[3] = { 0, 15, 0 };
-float gGravity = (float) -1/1.2;
+float gGravity = (float) -0.007;
 float gWind[3] = { 1, 0, 0 };
 
 bool gPause = false;
@@ -58,8 +58,8 @@ void keyboard(unsigned char key, int xIn, int yIn)
 	case 'w':
 		particleSystem.spawnParticle();
 		break;
-	case 'e':
-		particleSystem.updateParticles();
+	case 'f':
+		particleSystem.toggleFriction();
 		break;
 	case 'q':
 	case 27:	//27 is the esc key

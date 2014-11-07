@@ -6,7 +6,7 @@ long Particle::numParticles;
 Particle::Particle(int particleType, float position[3], float direction[3], float speed, float size, float color[3])
 {
 	numParticles++;
-	this->lifeRemaining = 300;
+	this->lifeRemaining = 600;
 	for (int i = 0; i <= 2; i++)
 		this->rotation[i] = rand() % 359;
 	
@@ -122,4 +122,10 @@ void Particle::applyFriction(float friction)
 {
 	for (int i = 0; i <= 2; i++)
 		this->direction[i] *= friction;
+}
+
+void Particle::applyGravity(float gravity)
+{
+	if (this->direction[1] > -0.3)
+		this->direction[1] += gravity;
 }

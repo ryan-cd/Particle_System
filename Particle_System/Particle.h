@@ -40,5 +40,6 @@ public:
 	void decrementNumParticles(void);
 	void invertYDirection(void);
 	void applyFriction(float friction);
+	void applyGravity(float gravity);
 };
 #endif
