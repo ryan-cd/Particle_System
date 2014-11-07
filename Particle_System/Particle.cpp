@@ -5,13 +5,14 @@ long Particle::numParticles;
 
 Particle::Particle(int particleType, float position[3], float direction[3], float speed, float size, float color[3])
 {
-	//add safety check
-	this->particleType = (_property) particleType;
-	numParticles++;
-	this->lifeRemaining = 600;
+	this->particleType = (_property) particleType; //use the particleType from argument list
+	numParticles++; //add to the number of alive particles
+	this->lifeRemaining = 900; //timeout time default
+	//random rotation on each axis
 	for (int i = 0; i <= 2; i++)
-		this->rotation[i] = rand() % 359;
+		this->rotation[i] = rand() % 359; 
 	
+	//set the position, direction, and color
 	for (int i = 0; i <= 2; i++)
 	{
 		this->position[i] = position[i];
@@ -20,6 +21,7 @@ Particle::Particle(int particleType, float position[3], float direction[3], floa
 	}
 }
 
+//decrement the timeout timer
 void Particle::updateLife()
 {
 	this->lifeRemaining--;
@@ -31,6 +33,7 @@ void Particle::updateLife()
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+//get time to timeout
 float Particle::getLifeRemaining()
 {
 	return this->lifeRemaining;
@@ -100,7 +103,6 @@ int Particle::getParticleType(void)
 
 void Particle::setPosition(float newPosition[3])
 {
-	//add safety checks
 	this->position[0] = newPosition[0];
 	this->position[1] = newPosition[1];
 	this->position[2] = newPosition[2];

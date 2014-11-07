@@ -1,8 +1,18 @@
-﻿Build started 2014-11-06 11:49:45 PM.
+﻿Build started 2014-11-07 11:40:24 AM.
      1>Project "C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Particle_System\Particle_System.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ShapeCreator.cpp
-         ShapeCreator.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
+         Source.cpp
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(59): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(175): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(179): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(186): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(194): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(202): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(210): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(218): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(226): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\ryan\dropbox\mcmaster\comp sci 3gc3\assignments\particle_system\particle_system\source.cpp(263): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Debug\Particle_System.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Debug\Particle_System.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ryan\Dropbox\McMaster\COMP SCI 3GC3\Assignments\Particle_System\Debug\Particle_System.lib" /MACHINE:X86 Debug\Particle.obj
          Debug\ParticleSystem.obj
@@ -13,4 +23,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.75
+Time Elapsed 00:00:00.86

@@ -13,6 +13,7 @@
 #  include <OpenGL/glu.h>
 #  include <GLUT/glut.h>
 #else
+//This is set for a WINDOWS OS
 //#  include <GL/gl.h>
 //#  include <GL/glu.h>
 //#  include <GL/freeglut.h>

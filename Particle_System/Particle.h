@@ -5,19 +5,17 @@
 class Particle{
 	
 private:
-	static long numParticles;
+	static long numParticles; //stores number of generated alive particles
 
-	float position[3];
-	float nextPosition[3];
+	float position[3]; 
 	float direction[3];
 	float speed;
-	bool isMoving;
 	float rotation[3];
 
 	
 	float color[3];
 	float size;
-	float lifeRemaining;
+	float lifeRemaining; // when this value reaches 0 the particle has timed out
 	enum _property {NORMAL, BOUNCE, FLOAT, EXPLOSION} particleType;
 
 public:
@@ -26,20 +24,20 @@ public:
 	
 	
 	//getters
-	float getLifeRemaining(void);
+	float getLifeRemaining(void); // get the time until timeout
 	float getPosition(int position);
 	float getDirection(int direction);
 	float getColor(int newColor);
-	long getNumParticles(void);
+	long getNumParticles(void); //get the number of alive particles
 	float getRotation(int axis);
 	int getParticleType(void);
 
 	//setters
 	void setPosition(float newPosition[3]);
 	void setRotation(float newRotation[3]);
-	void setLifeRemaining(int newLifeRemaining);
-	void decrementNumParticles(void);
-	void invertYDirection(void);
+	void setLifeRemaining(int newLifeRemaining); //set time to timeout
+	void decrementNumParticles(void); //decrement the amount of alive particles
+	void invertYDirection(void); //flip the Y direction
 	void applyFriction(float friction);
 	void applyGravity(float gravity);
 	void setNumParticles(unsigned int amount);
