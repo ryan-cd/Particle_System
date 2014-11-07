@@ -6,7 +6,7 @@ long Particle::numParticles;
 Particle::Particle(int particleType, float position[3], float direction[3], float speed, float size, float color[3])
 {
 	numParticles++;
-	this->lifeRemaining = 30;
+	this->lifeRemaining = 300;
 	for (int i = 0; i <= 2; i++)
 		this->rotation[i] = rand() % 359;
 	
@@ -97,6 +97,12 @@ void Particle::setPosition(float newPosition[3])
 	this->position[2] = newPosition[2];
 }
 
+void Particle::setRotation(float newRotation[3])
+{
+	for (int i = 0; i <= 2; i++)
+		this->rotation[i] = newRotation[i];
+}
+
 void Particle::setLifeRemaining(int newLifeRemaining)
 {
 	this->lifeRemaining = newLifeRemaining;
@@ -110,4 +116,10 @@ void Particle::decrementNumParticles(void)
 void Particle::invertYDirection(void)
 {
 	this->direction[1] *= -1;
+}
+
+void Particle::applyFriction(float friction)
+{
+	for (int i = 0; i <= 2; i++)
+		this->direction[i] *= friction;
 }

@@ -1,12 +1,18 @@
 #include "ParticleSystem.h"
 
+//IMPLEMENT DELETING WHEN FALLING TOO FAR OFF STAGE
+
 Particle* particle; //used to create new particles in the linked list
 float gParticleSize = 0.5;
+float gAmountToRotate = 10;
+float gSpeed = 0.09;
+float gFriction = 0.9;
 
 ParticleSystem::ParticleSystem(float position[3], float gravity, float wind[3])
 {
-	
+	this->minX = this->minY = this->minZ = 0;
 	this->gravity = gravity;
+	this->friction = true;
 
 	for (int i = 0; i <= 2; i++)
 		this->position[i] = position[i];
@@ -105,40 +111,57 @@ void ParticleSystem::updateParticles(void)
 	
 	
 	float newPosition[3] = { 0, 0, 0 };
-	
+	float newRotation[3] = { 0, 0, 0 };
+
 	while (iteratorA != NULL && iteratorA->element != NULL)
 	{
-		
+
 		iteratorA->element->updateLife();
 		if (iteratorA->element->getLifeRemaining() <= 0)
 		{
-			
+
 			if (iteratorA->prev != NULL)
 				iteratorA->prev->next = iteratorA->next;
 			if (iteratorA->next != NULL)
 				iteratorA->next->prev = iteratorA->prev;
-			
+
 			iteratorA->element->decrementNumParticles();
-			
+
 			iteratorA->element = NULL;
 			iteratorA = iteratorA->next;
 			head = iteratorA;
-			
+
 			continue;
-			
+
 		}
 
 		//set newPosition[3] to hold the new position of the particle
 		for (int i = 0; i <= 2; i++)
 		{
 			newPosition[i] = iteratorA->element->getPosition(i);
-			newPosition[i] += iteratorA->element->getDirection(i);
+			newPosition[i] += iteratorA->element->getDirection(i) * gSpeed;
+
+			newRotation[i] += gAmountToRotate;
 		}
-		if (newPosition[1] < 0)
+
+		if (newPosition[1] < this->bounceY
+			&& newPosition[0] > this->minX
+			&& newPosition[0] < this->maxX
+			&& newPosition[2] > this->minZ
+			&& newPosition[2] < this->maxZ)
+		{
 			iteratorA->element->invertYDirection();
+			newPosition[1] = bounceY;
+			if (this->friction)
+			{
+				iteratorA->element->applyFriction(gFriction);
+			}
+				
+		}
 		
 		//move the element to newPosition
 		iteratorA->element->setPosition(newPosition);
+		iteratorA->element->setRotation(newRotation);
 
 		//tell newPosition to go back to the spawn position
 		for (int i = 0; i < 2; i++)
@@ -154,4 +177,19 @@ void ParticleSystem::updateParticles(void)
 float ParticleSystem::getGravity()
 {
 	return this->gravity;
+}
+
+void ParticleSystem::setPlatformDimensions(float width, float height, float depth)
+{
+	minX = -width / 2;
+	maxX = width / 2;
+	minY = -width; // erase when fallen too far past the floor
+	bounceY = height / 2; //y value where a bounce should happen (top of platform)
+	minZ = -depth / 2;
+	maxZ = depth / 2;
+}
+
+void ParticleSystem::toggleFriction(void)
+{
+	this->friction = this->friction ? false : true;
 }

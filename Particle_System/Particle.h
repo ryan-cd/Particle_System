@@ -35,8 +35,10 @@ public:
 
 	//setters
 	void setPosition(float newPosition[3]);
+	void setRotation(float newRotation[3]);
 	void setLifeRemaining(int newLifeRemaining);
 	void decrementNumParticles(void);
 	void invertYDirection(void);
+	void applyFriction(float friction);
 };
 #endif

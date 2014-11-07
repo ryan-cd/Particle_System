@@ -19,11 +19,14 @@ bool gPause = false;
 ShapeCreator shapeCreator;
 ParticleSystem particleSystem(gParticleSysPos, gGravity, gWind);
 
+
 void init(void)
 {
 	//set random number generator seed
 	srand(time(NULL));
 
+	//tell the particle system where the platform edges are
+	particleSystem.setPlatformDimensions(gPlatformWidth, gPlatformHeight, gPlatformDepth);
 
 	/* Setup GL features */
 	
@@ -35,7 +38,6 @@ void init(void)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45, 1, 1, 100);
-
 	
 }
 
@@ -124,10 +126,10 @@ void display(void)
 
 void timer(int value)
 {
-	glutTimerFunc(50, timer, 0);
+	glutTimerFunc(8, timer, 0);
 	if (!gPause)
 	{
-		particleSystem.spawnParticle();
+		//particleSystem.spawnParticle();
 		particleSystem.updateParticles();
 
 		glutPostRedisplay();
