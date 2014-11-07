@@ -5,6 +5,8 @@ long Particle::numParticles;
 
 Particle::Particle(int particleType, float position[3], float direction[3], float speed, float size, float color[3])
 {
+	//add safety check
+	this->particleType = (_property) particleType;
 	numParticles++;
 	this->lifeRemaining = 600;
 	for (int i = 0; i <= 2; i++)
@@ -81,6 +83,13 @@ float Particle::getRotation(int axis)
 	else
 		return 0;
 }
+
+int Particle::getParticleType(void)
+{
+	return (int)this->particleType;
+}
+
+
 
 /* 
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

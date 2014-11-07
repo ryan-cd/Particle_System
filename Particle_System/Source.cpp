@@ -3,6 +3,7 @@
 
 //Globals.
 float gCamPos[3] = { 0, 13, 50 }; // where the camera is
+float gSceneRotation[3] = { 0, 0, 0 };
 
 //float gPlatformVerteces[8][3] = { { -1, -1, 1 }, { -1, 1, 1 }, { 1, 1, 1 }, { 1, -1, 1 }, { -1, -1, -1 }, { -1, 1, -1 }, { 1, 1, -1 }, { 1, -1, -1 } }; //vertices to make a platform box
 float gPlatformColors[6][3] = { { 1, 0, 0 }, { 0, 1, 1 }, { 1, 1, 0 }, { 0, 1, 0 }, { 0, 0, 1 }, { 1, 0, 1 } }; //colors of the faces of the platform box
@@ -12,7 +13,7 @@ float gPlatformDepth = 30;
 
 float gParticleSysPos[3] = { 0, 15, 0 };
 float gGravity = (float) -0.007;
-float gWind[3] = { 1, 0, 0 };
+float gWind[3] = { 0, 0, 0 };
 
 bool gPause = false;
 
@@ -65,6 +66,15 @@ void keyboard(unsigned char key, int xIn, int yIn)
 	case 'f':
 		particleSystem.toggleFriction();
 		break;
+	case '1':
+		particleSystem.setParticleType(0);
+		break;
+	case '2':
+		particleSystem.setParticleType(1);
+		break;
+	case '3':
+		particleSystem.setParticleType(2);
+		break;
 	case 'q':
 	case 27:	//27 is the esc key
 		exit(0);
@@ -79,19 +89,23 @@ void special(int key, int x, int y)
 	{
 		
 	case GLUT_KEY_LEFT:
-		gCamPos[0] -= 0.3;
+		//gCamPos[0] -= 0.3;
+		gSceneRotation[1] -= 1;
 		break;
 
 	case GLUT_KEY_RIGHT:
-		gCamPos[0] += 0.3;
+		//gCamPos[0] += 0.3;
+		gSceneRotation[1] += 1;
 		break;
 
 	case GLUT_KEY_UP:
-		gCamPos[2] -= 0.3;
+		//gCamPos[2] -= 0.3;
+		gSceneRotation[0] += 1;
 		break;
 
 	case GLUT_KEY_DOWN:
-		gCamPos[2] += 0.3;
+		//gCamPos[2] += 0.3;
+		gSceneRotation[0] -= 1;
 		break;
 
 	case GLUT_KEY_HOME:
@@ -101,7 +115,36 @@ void special(int key, int x, int y)
 	case GLUT_KEY_END:
 		gCamPos[1] -= 0.3;
 		break;
+		
+	case GLUT_KEY_F1:
+		gWind[0] += 0.05;
+		particleSystem.updateWind(gWind);
+		break;
 
+	case GLUT_KEY_F2:
+		gWind[0] -= 0.05;
+		particleSystem.updateWind(gWind);
+		break;
+
+	case GLUT_KEY_F3:
+		gWind[1] += 0.05;
+		particleSystem.updateWind(gWind);
+		break;
+
+	case GLUT_KEY_F4:
+		gWind[1] -= 0.05;
+		particleSystem.updateWind(gWind);
+		break;
+
+	case GLUT_KEY_F5:
+		gWind[2] += 0.05;
+		particleSystem.updateWind(gWind);
+		break;
+
+	case GLUT_KEY_F6:
+		gWind[2] -= 0.05;
+		particleSystem.updateWind(gWind);
+		break;
 	}
 	glutPostRedisplay();
 }
@@ -120,12 +163,14 @@ void display(void)
 	gluLookAt(gCamPos[0], gCamPos[1], gCamPos[2], 0, 0, 0, 0, 1, 0);
 	
 
-	
+	glPushMatrix();
+	glRotatef(gSceneRotation[0], 1, 0, 0);
+	glRotatef(gSceneRotation[1], 0, 1, 0);
 	shapeCreator.drawBox(origin, gPlatformWidth, gPlatformHeight, gPlatformDepth, gPlatformColors);
 	
 	
 	particleSystem.drawParticles();
-	
+	glPopMatrix();
 	glutSwapBuffers();
 }
 

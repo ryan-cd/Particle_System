@@ -16,6 +16,8 @@ public:
 	void setPlatformDimensions(float width, float height, float depth);
 	void toggleFriction(); 
 	void reset();
+	void updateWind(float newWind[3]);
+	void setParticleType(int newType);
 
 private:
 	float position[3]; //where the particle system is
@@ -24,6 +26,8 @@ private:
 	bool isExplosion; //the partice system behaves differently if it is an explosion
 	float minX, minY, bounceY, minZ, maxX, maxZ;
 	bool friction;
+	enum _property { NORMAL, BOUNCE, FLOAT, EXPLOSION } particleType;
+	
 
 	//doubly linked list storing particles
 	struct ParticleList{

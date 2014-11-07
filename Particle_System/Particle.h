@@ -32,6 +32,7 @@ public:
 	float getColor(int newColor);
 	long getNumParticles(void);
 	float getRotation(int axis);
+	int getParticleType(void);
 
 	//setters
 	void setPosition(float newPosition[3]);
